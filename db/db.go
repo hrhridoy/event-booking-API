@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -22,7 +23,7 @@ func InitDB() {
 func createTables() {
 	createEventsTable := `
 	CREATE TABLE IF NOT EXISTS events (
-		id INTEGERS PRIMARY KEY AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,
 		description TEXT NOT NULL,
 		location TEXT NOT NULL,
@@ -31,8 +32,9 @@ func createTables() {
 	)
 	`
 
-	_, err := DB.Exec(createEventsTable)
+	res, err := DB.Exec(createEventsTable)
 	if err != nil {
 		panic("Could not create events table...")
 	}
+	fmt.Println(res)
 }
