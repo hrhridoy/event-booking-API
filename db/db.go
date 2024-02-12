@@ -11,11 +11,12 @@ var DB *sql.DB
 
 func InitDB() {
 	// DB, err := sql.Open("sqlite3", "api.db")
-	DB, _ = sql.Open("sqlite3", "api.db")
-	// if err != nil {
-	// 	// panic("Could not connect to the DB...")
-	// 	fmt.Println("error from the initDB", err.Error())
-	// }
+	var err error
+	DB, err = sql.Open("sqlite3", "api.db")
+	if err != nil {
+		// panic("Could not connect to the DB...")
+		fmt.Println("error from the initDB", err.Error())
+	}
 
 	DB.SetMaxOpenConns(10)
 	DB.SetMaxIdleConns(5)
