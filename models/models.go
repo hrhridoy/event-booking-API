@@ -17,7 +17,7 @@ type Event struct {
 
 // All the events that are created based on the Events struct are stored in this variable.
 // this variable Events is type of Slice of Events structs
-var events = []Event{}
+// var events []Event
 
 func (e *Event) Save() error {
 	// Events will be stored on the DB Later.

@@ -10,10 +10,12 @@ import (
 var DB *sql.DB
 
 func InitDB() {
-	DB, err := sql.Open("sqlite3", "api.db")
-	if err != nil {
-		panic("Could not connect to the DB...")
-	}
+	// DB, err := sql.Open("sqlite3", "api.db")
+	DB, _ = sql.Open("sqlite3", "api.db")
+	// if err != nil {
+	// 	// panic("Could not connect to the DB...")
+	// 	fmt.Println("error from the initDB", err.Error())
+	// }
 
 	DB.SetMaxOpenConns(10)
 	DB.SetMaxIdleConns(5)
@@ -29,12 +31,12 @@ func createTables() {
 		location TEXT NOT NULL,
 		dateTime DATETIME NOT NULL,
 		user_id INTEGER
-	)
-	`
+	)`
 
 	res, err := DB.Exec(createEventsTable)
 	if err != nil {
-		panic("Could not create events table...")
+		// panic("Could not create events table...")
+		fmt.Println("error from the createTable()", err.Error())
 	}
 	fmt.Println(res)
 }
