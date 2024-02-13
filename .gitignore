@@ -28,4 +28,4 @@ go.work
 *.sqlite
 
 #### SQLite DB ###
-*.db
+# *.db

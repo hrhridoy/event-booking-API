@@ -12,7 +12,7 @@ var DB *sql.DB
 func InitDB() {
 	// DB, err := sql.Open("sqlite3", "api.db")
 	var err error
-	DB, err = sql.Open("sqlite3", "api.db")
+	DB, err = sql.Open("sqlite3", "./db/api.db")
 	if err != nil {
 		// panic("Could not connect to the DB...")
 		fmt.Println("error from the initDB", err.Error())
