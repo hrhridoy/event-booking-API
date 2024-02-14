@@ -12,7 +12,7 @@ type Event struct {
 	Description string `bindings:"required"`
 	Location    string `bindings:"required"`
 	DateTime    time.Time
-	UserID      int
+	UserID      int64
 }
 
 // All the events that are created based on the Events struct are stored in this variable.

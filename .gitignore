@@ -18,6 +18,9 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# Secret Keys
+.env
+
 # Go workspace file
 go.work
 
@@ -28,4 +31,4 @@ go.work
 *.sqlite
 
 #### SQLite DB ##
-db/api.db
+db/*.db

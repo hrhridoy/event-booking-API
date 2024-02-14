@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/hrhridoy/event-booking-API/models"
+	"github.com/hrhridoy/event-booking-API/utils"
 )
 
 func getEvents(context *gin.Context) {
@@ -18,14 +19,24 @@ func getEvents(context *gin.Context) {
 }
 
 func createEvents(context *gin.Context) {
+	token := context.Request.Header.Get("Authorization")
+	if token == "" {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized request. Empty token"})
+		return
+	}
+	UserId, err := utils.VerifyTOken(token)
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized request.", "err": err.Error()})
+		return
+	}
+
 	var event models.Event
-	err := context.ShouldBindJSON(&event)
+	err = context.ShouldBindJSON(&event)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "could not parse request data..."})
 		return
 	}
-	event.ID = 1
-	event.UserID = 1
+	event.UserID = UserId
 	err = event.Save()
 	if err != nil {
 		// fmt.Println(err.Error())
