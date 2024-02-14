@@ -14,6 +14,10 @@ func getEvents(context *gin.Context) {
 		// fmt.Println(err.Error())
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch events..."})
 	}
+	if events == nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "No Events Created by Users."})
+		return
+	}
 	context.JSON(http.StatusOK, events)
 }
 
